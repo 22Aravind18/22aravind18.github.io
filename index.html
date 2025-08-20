@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KnowBits — Bite‑size Knowledge That Sticks</title>
+  <meta name="description" content="KnowBits is a clean, fast, ad‑free knowledge site with bite‑size tutorials, cheat sheets, and simple explainers." />
+  <meta name="author" content="Your Name" />
+
+  <!-- Open Graph / Twitter for better sharing -->
+  <meta property="og:title" content="KnowBits — Bite‑size Knowledge That Sticks" />
+  <meta property="og:description" content="Fast, simple explainers, cheat sheets and hands‑on guides." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-username.github.io/" />
+  <meta property="og:image" content="https://your-username.github.io/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Theme color for mobile address bar -->
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- Optional: Google Font (works fine on GitHub Pages). Remove if you want fully local fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b1220;          /* dark base */
+      --card:#111827;
+      --muted:#94a3b8;
+      --text:#e5e7eb;
+      --brand:#0ea5e9;       /* sky-500 */
+      --brand-2:#22d3ee;     /* cyan-400 */
+      --accent:#a78bfa;      /* violet-400 */
+      --ok:#10b981;          /* emerald */
+      --warn:#f59e0b;        /* amber */
+      --danger:#ef4444;      /* red */
+      --ring: 0 0 0 3px rgba(14,165,233,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f8fafc; --card:#ffffff; --text:#0f172a; --muted:#475569; }
+      body{ background:linear-gradient(180deg,#ffffff, #f1f5f9 40%, #e2e8f0); }
+    }
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, Noto Sans, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text); background: radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.25), transparent 50%),
+                         radial-gradient(900px 500px at -10% 10%, rgba(167,139,250,.2), transparent 50%),
+                         var(--bg);
+    }
+    a{ color:inherit; text-decoration:none }
+    .container{ max-width:1100px; margin:0 auto; padding:0 1rem }
+    header{
+      position:sticky; top:0; z-index:40; backdrop-filter: blur(10px);
+      background:rgba(11,18,32,.6); border-bottom:1px solid rgba(148,163,184,.15);
+    }
+    header .row{ display:flex; align-items:center; gap:.75rem; padding:.75rem 0 }
+    .brand{ display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.2px }
+    .logo{ width:36px; height:36px; display:grid; place-items:center; border-radius:12px;
+           background: conic-gradient(from 180deg, var(--brand), var(--brand-2), var(--accent), var(--brand));
+           color:white; font-weight:900 }
+    nav{ margin-left:auto; display:flex; gap:1rem; align-items:center }
+    nav a{ opacity:.9; font-weight:600 }
+    nav a:hover{ opacity:1; text-decoration:underline; text-underline-offset:4px }
+    .btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.6rem 1rem; border-radius:999px; font-weight:700; border:1px solid rgba(148,163,184,.25); background:rgba(255,255,255,.04) }
+    .btn:focus{ outline:none; box-shadow:var(--ring) }
+
+    /* Hero */
+    .hero{ padding:4.5rem 0 3rem }
+    .hero-grid{ display:grid; gap:1.25rem; grid-template-columns: 1.2fr .8fr }
+    .badge{ display:inline-flex; align-items:center; gap:.4rem; padding:.35rem .6rem; border-radius:999px; font-size:.85rem; font-weight:700; color:#082f49; background: linear-gradient(90deg,#67e8f9,#a78bfa); }
+    h1{ font-size:clamp(2rem,4vw,3.2rem); line-height:1.1; margin:.75rem 0 }
+    .lead{ font-size:1.1rem; color:var(--muted); max-width:60ch }
+    .hero .card{ padding:1rem; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(148,163,184,.15); border-radius:16px }
+    .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; margin-top:1rem }
+    .stat{ background:var(--card); border:1px solid rgba(148,163,184,.15); border-radius:16px; padding:1rem }
+    .stat h3{ margin:.2rem 0; font-size:1.6rem }
+    .stat p{ margin:.15rem 0; color:var(--muted); font-size:.9rem }
+
+    /* Sections */
+    section{ padding:2.5rem 0 }
+    .grid{ display:grid; gap:1rem }
+    .grid.cols-3{ grid-template-columns: repeat(3, 1fr) }
+    .grid.cols-2{ grid-template-columns: repeat(2, 1fr) }
+    .card{ background:var(--card); border:1px solid rgba(148,163,184,.15); border-radius:18px; padding:1rem }
+    .card h3{ margin-top:.25rem }
+    .card p{ color:var(--muted) }
+    .chip{ display:inline-flex; align-items:center; gap:.4rem; font-size:.8rem; padding:.3rem .55rem; border-radius:999px; border:1px dashed rgba(148,163,184,.35) }
+
+    /* Article list */
+    .post{ display:flex; gap:1rem; align-items:flex-start; padding:1rem; border-radius:14px; border:1px solid rgba(148,163,184,.15); background:rgba(255,255,255,.03) }
+    .post:hover{ transform: translateY(-1px); transition:.2s ease; background:rgba(255,255,255,.06) }
+    .post .thumb{ flex:0 0 84px; height:84px; border-radius:10px; background:linear-gradient(135deg, var(--brand), var(--accent)); display:grid; place-items:center; color:white; font-weight:800 }
+    .post .meta{ color:var(--muted); font-size:.85rem }
+
+    /* CTA */
+    .cta{ display:flex; flex-direction:column; gap:.8rem; align-items:flex-start; padding:1.25rem; border-radius:18px; background:linear-gradient(90deg, rgba(14,165,233,.18), rgba(167,139,250,.18)); border:1px solid rgba(148,163,184,.2) }
+
+    /* Newsletter */
+    .newsletter{ display:flex; gap:.5rem; width:100% }
+    .newsletter input{ flex:1; padding:.8rem 1rem; background:var(--card); border:1px solid rgba(148,163,184,.25); color:var(--text); border-radius:12px }
+
+    /* Footer */
+    footer{ padding:2rem 0; border-top:1px solid rgba(148,163,184,.15); color:var(--muted) }
+
+    /* Responsive */
+    @media (max-width: 900px){ .hero-grid{ grid-template-columns: 1fr } .grid.cols-3{ grid-template-columns: 1fr } }
+    @media (max-width: 700px){ .grid.cols-2{ grid-template-columns: 1fr } }
+  </style>
+
+  <!-- Basic structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "KnowBits",
+    "url": "https://your-username.github.io/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://your-username.github.io/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="row">
+        <a class="brand" href="#">
+          <span class="logo">KB</span>
+          <span>KnowBits</span>
+        </a>
+        <nav>
+          <a href="#guides">Guides</a>
+          <a href="#tips">Daily Tips</a>
+          <a href="#cheats">Cheat Sheets</a>
+          <a href="#about">About</a>
+          <button class="btn" id="themeBtn" aria-label="Toggle theme">🌗 Theme</button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <span class="badge">New • Updated weekly</span>
+          <h1>Bite‑size knowledge that <span style="background:linear-gradient(90deg,var(--brand),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent">actually sticks</span>.</h1>
+          <p class="lead">Simple explainers, practical guides and downloads for busy learners. No fluff. No ads. Just the good stuff.</p>
+          <div style="display:flex; gap:.6rem; margin-top:1rem">
+            <a class="btn" href="#guides">📚 Explore Guides</a>
+            <a class="btn" href="#newsletter">📩 Get Updates</a>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <p>Total Guides</p>
+              <h3>24</h3>
+              <p class="chip">Goal: 100</p>
+            </div>
+            <div class="stat">
+              <p>Cheat Sheets</p>
+              <h3>12</h3>
+              <p class="chip">PDFs included</p>
+            </div>
+            <div class="stat">
+              <p>Community</p>
+              <h3>1,240</h3>
+              <p class="chip">Email subscribers</p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin:0">Featured: The 3‑2‑1 Learning System</h3>
+          <p style="margin-top:.4rem" class="lead">A tiny weekly ritual to learn faster: 3 ideas, 2 quotes, 1 challenge. Save 15 minutes every week and keep momentum.</p>
+          <ul>
+            <li>✅ Works with any topic (tech, career, health)</li>
+            <li>✅ Takes ~10 minutes per week</li>
+            <li>✅ Printable PDF included</li>
+          </ul>
+          <a class="btn" href="#guides">Read the mini‑guide →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUIDES -->
+    <section id="guides">
+      <h2>Popular Guides</h2>
+      <div class="grid cols-3" style="margin-top:1rem">
+        <article class="card">
+          <div class="chip">Beginner • 7 min</div>
+          <h3>Prompting 101: Talk to AI like a pro</h3>
+          <p>5 patterns that work everywhere (task → context → examples → constraints → tone) with copy‑paste templates.</p>
+          <a class="btn" href="#">Open Guide</a>
+        </article>
+        <article class="card">
+          <div class="chip">Career • 5 min</div>
+          <h3>One SQL trick a day</h3>
+          <p>Micro‑lessons to clean, join and summarize data the right way without memorizing syntax.</p>
+          <a class="btn" href="#">Open Guide</a>
+        </article>
+        <article class="card">
+          <div class="chip">Productivity • 4 min</div>
+          <h3>Deep‑work without burnout</h3>
+          <p>Design your 90‑minute focus block with warm‑up, no‑phone mode and a smart shut‑down ritual.</p>
+          <a class="btn" href="#">Open Guide</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- DAILY TIPS -->
+    <section id="tips">
+      <h2>Latest Tips</h2>
+      <div class="grid" style="margin-top:1rem">
+        <a class="post" href="#">
+          <div class="thumb">A1</div>
+          <div>
+            <h3>Split any hard task into 15‑minute sprints</h3>
+            <div class="meta">Posted Aug 12, 2025 • Read in 2 min</div>
+            <p class="meta">Start with: plan (5), execute (5), log (5). Repeat x3 for a focused 45‑minute block.</p>
+          </div>
+        </a>
+        <a class="post" href="#">
+          <div class="thumb">A2</div>
+          <div>
+            <h3>Learn faster with “worked examples”</h3>
+            <div class="meta">Posted Aug 8, 2025 • Read in 3 min</div>
+            <p class="meta">Study solved problems before attempting your own — it builds patterns your brain can reuse.</p>
+          </div>
+        </a>
+        <a class="post" href="#">
+          <div class="thumb">A3</div>
+          <div>
+            <h3>Five keyboard shortcuts you’ll actually use</h3>
+            <div class="meta">Posted Aug 3, 2025 • Read in 2 min</div>
+            <p class="meta">Ctrl/⌘+L (focus URL), Ctrl/⌘+Shift+T (reopen tab), Alt+Tab mastery, and more.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CHEAT SHEETS / DOWNLOADS -->
+    <section id="cheats">
+      <h2>Cheat Sheets & Downloads</h2>
+      <div class="grid cols-3" style="margin-top:1rem">
+        <div class="card">
+          <h3>Ultimate Python Cheat Sheet</h3>
+          <p>One‑page essentials for loops, list/dict tricks, pandas patterns.</p>
+          <a class="btn" href="#">Download PDF</a>
+        </div>
+        <div class="card">
+          <h3>Prompt Templates Pack</h3>
+          <p>+25 ready‑to‑use prompts for coding, writing and learning.</p>
+          <a class="btn" href="#">Download ZIP</a>
+        </div>
+        <div class="card">
+          <h3>Weekly Planner (Printable)</h3>
+          <p>Simple 3‑2‑1 layout for learning and deep work.</p>
+          <a class="btn" href="#">Download PDF</a>
+        </div>
+      </div>
+      <div class="cta" style="margin-top:1rem">
+        <strong>Want your tool or course featured here?</strong>
+        <p class="lead" style="margin:.2rem 0 .6rem">We occasionally feature genuinely useful resources. No spam, no fluff.</p>
+        <a class="btn" href="#contact">Become a sponsor →</a>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section id="newsletter">
+      <h2>Get the 3‑2‑1 Friday email</h2>
+      <p class="lead">3 ideas, 2 quotes, 1 challenge — once a week. Unsubscribe anytime.</p>
+      <form class="newsletter" onsubmit="subscribe(event)">
+        <input id="email" type="email" placeholder="your@email.com" required aria-label="Email address" />
+        <button class="btn" type="submit">Subscribe</button>
+      </form>
+      <p class="meta">Privacy‑friendly: we only email you. No tracking pixels.</p>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About</h2>
+      <div class="grid cols-2" style="margin-top:1rem">
+        <div class="card">
+          <h3>What is KnowBits?</h3>
+          <p>KnowBits is a lightweight, fast knowledge site. We write practical explainers so you can learn faster and build real skills — without doom‑scrolling.</p>
+          <ul>
+            <li>⚡ Lightning‑fast static site (no frameworks required)</li>
+            <li>🧩 Pure HTML/CSS/JS — perfect for GitHub Pages</li>
+            <li>🔒 Privacy‑first, no cookies by default</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Can I use this template?</h3>
+          <p>Yes. Replace text, add your own guides and PDFs, and publish on GitHub Pages. Credit appreciated but not required.</p>
+          <div class="chip">MIT‑style template • Free</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FOOTER CTA -->
+    <section id="contact">
+      <div class="cta">
+        <h2 style="margin:.2rem 0">Have feedback or a request?</h2>
+        <p>Write to <a href="mailto:yourname@example.com">yourname@example.com</a> or open an issue on your repository.</p>
+        <a class="btn" href="mailto:yourname@example.com?subject=KnowBits%20Sponsorship">💌 Contact</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center">
+      <div>© <span id="year"></span> KnowBits. Built with ❤ and shipped on GitHub Pages.</div>
+      <div style="display:flex; gap:.8rem">
+        <a href="#" class="chip">RSS</a>
+        <a href="#" class="chip">Privacy</a>
+        <a href="#" class="chip">Source</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year stamp
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Fake subscribe handler (replace with your provider like Buttondown, Beehiiv, Mailchimp, etc.)
+    function subscribe(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      if(!email) return;
+      alert(`Thanks! A confirmation was sent to ${email}. (Wire this to your newsletter later.)`);
+      e.target.reset();
+    }
+
+    // Simple theme toggle (light/dark)
+    const themeBtn = document.getElementById('themeBtn');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let manual = localStorage.getItem('theme');
+    applyTheme(manual || (prefersDark ? 'dark' : 'light'));
+
+    themeBtn.addEventListener('click', () => {
+      const next = (document.documentElement.dataset.theme === 'dark') ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+
+    function applyTheme(mode){
+      document.documentElement.dataset.theme = mode;
+      if(mode === 'light'){
+        document.body.style.background = 'linear-gradient(180deg,#ffffff,#f1f5f9 40%, #e2e8f0)';
+        document.querySelector('header').style.background = 'rgba(255,255,255,.75)';
+      } else {
+        document.body.style.background = 'radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.25), transparent 50%),\n                         radial-gradient(900px 500px at -10% 10%, rgba(167,139,250,.2), transparent 50%),\n                         #0b1220';
+        document.querySelector('header').style.background = 'rgba(11,18,32,.6)';
+      }
+    }
+  </script>
+
+  <!-- Optional: lightweight analytics (privacy‑friendly). Replace with your own or remove. -->
+  <!-- <script defer data-domain="your-domain.com" src="https://plausible.io/js/script.js"></script> -->
+</body>
+</html>
